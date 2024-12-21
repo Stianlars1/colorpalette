@@ -1,0 +1,53 @@
+.textPreview {
+  flex: 1 1 100%;
+  padding: 1.5rem;
+  width: min(700px, 100%);
+  margin: 0 auto;
+  background-color: hsl(var(--background));
+  border-radius: 1rem;
+  box-shadow: 0 0 0 1px hsl(var(--foreground) / 0.05);
+
+  will-change: auto;
+  transition: all 0.2s ease;
+  height: fit-content;
+
+  &:hover {
+    background-color: hsl(var(--card) / 0.8);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .title {
+    color: hsl(var(--foreground));
+  }
+
+  .date {
+    color: hsl(var(--foreground-subtle));
+  }
+
+  .summary {
+    color: hsl(var(--muted-foreground));
+    margin-top: 0.5rem;
+  }
+
+  .paragraph,
+  .linkText {
+    color: hsl(var(--foreground));
+    margin-top: 0.5rem;
+  }
+
+  .linkText {
+    font-weight: 300;
+
+    .link {
+      color: hsl(var(--primary));
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &::after {
+        content: "🔗";
+      }
+    }
+  }
+}

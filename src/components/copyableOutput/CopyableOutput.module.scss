@@ -1,0 +1,182 @@
+.dialogBackdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: red;
+  pointer-events: auto;
+}
+
+.dialogBackdropVisible {
+  display: block;
+}
+
+.dialog {
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /*0 4px 6px hsl(0 0% 0% / 20%);*/
+
+  //box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  width: min(700px, 100%);
+  max-width: calc(100vw - 2rem);
+  border-radius: 10px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); // Center the dialog
+  margin: 0; // Remove auto margin
+
+  background-color: hsl(var(--accent-6) / 0.05);
+  backdrop-filter: blur(5px);
+
+  overflow: hidden; // Prevent dialog from scrolling
+  display: none;
+  flex-direction: column;
+
+  .wrapper {
+    padding: 1rem;
+    background-color: transparent;
+
+    .closeButton {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: hsl(var(--gray-11));
+      width: 18px;
+      height: 18px;
+      transition: all 0.2s ease;
+      background-color: hsl(var(--gray-5));
+      border-radius: 50%;
+      padding: 0.25rem;
+      box-sizing: content-box;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      :hover {
+        color: hsl(var(--gray-12));
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      height: 100%; // Take full height
+      overflow: hidden; // Prevent dialog from scrolling
+
+      .formatSelection {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex-shrink: 0;
+
+        .label {
+          font-weight: 500;
+          color: hsl(var(--gray-12));
+          font-size: 0.875rem;
+        }
+
+        .radioLabel {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+
+          @media (max-width: 768px) {
+            font-size: 0.785rem;
+          }
+          background: hsl(var(--gray-5));
+          color: hsl(var(--gray-11));
+
+          .radioInput {
+            margin: 0;
+          }
+
+          &:hover {
+          }
+        }
+
+        .activeRadioLabel {
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
+        }
+
+        .radioGroup {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+      }
+
+      .output {
+        flex: 1; // Take remaining space
+        min-height: 0; // Important for flex containers
+        overflow: hidden; // Prevent dialog from scrolling
+      }
+
+      .codeBlock {
+        border-radius: 0.5rem;
+        margin: 0;
+        height: 100%; // Take full height
+        display: flex;
+        flex-direction: column;
+
+        .codeBlockTitle {
+          color: hsl(var(--gray-12));
+          margin: 0;
+          font-weight: 500;
+          flex-shrink: 0;
+        }
+
+        .codeBlockChoices {
+          color: #ddd;
+          font-size: 0.875rem;
+          font-style: italic;
+        }
+
+        .syntaxHighlighter {
+          min-height: 350px;
+          height: 100%;
+          overflow: hidden;
+          background-color: #18181b;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.exportButton {
+  padding: 0.45rem 1.2rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-weight: 500;
+
+  margin: 2rem auto;
+}
+
+.dialog[open] {
+  display: flex;
+
+  // Using nested selector for scoped class
+}
+
+.dialog::backdrop {
+  background: hsl(var(--background) / 0.85);
+  overflow: hidden;
+}

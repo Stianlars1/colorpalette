@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles here */
+* {
+    margin: 0;
+    padding: 0;
+    --box-shadow: 0px 2px 8px 0px #0000000a;
+}
+
+:root {
+    --max-width: 1024px;
+}
+
+
+body {
+    background-color: hsl(var(--background));
+    z-index: 1;
+    position: relative;
+
+}
+
+html {
+    scroll-padding-top: 4rem;
+    scroll-behavior: smooth;
+    background-color: hsl(var(--background));
+
+
+}
+
+.link {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::after {
+        content: "🔗";
+        margin-right: 4px;
+    }
+
+    &:hover {
+        color: hsl(var(--primary) / 0.8);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.container {
+    z-index: 1;
+
+
+    &::after {
+
+    }
+}
+
+.backgroundGradient {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 500px;
+    opacity: 0.9;
+    background: linear-gradient(to bottom, hsl(var(--accent-4)) , transparent );
+    z-index: -1;
+}
+
+.pageContentWrapper {
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .pageContentWrapper {
+        padding: 1rem;
+    }
+}
+
+
+
+
+
+
+body:has(.export_colors_dialog[open]) {
+    /* Poof! No more scrolling! */
+    overflow: hidden;
+}

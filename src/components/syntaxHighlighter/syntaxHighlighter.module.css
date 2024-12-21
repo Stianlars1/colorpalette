@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #18181b;
+  min-height: 100%;
+}
+
+.highlighterWrapper {
+  opacity: 1;
+  transition: opacity 0.15s ease;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.highlighterWrapper.transitioning {
+  opacity: 0.5;
+}
+
+.highlighter {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #18181b;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=syntaxHighlighter.module.css.map */

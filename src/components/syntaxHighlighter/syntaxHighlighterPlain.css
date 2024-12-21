@@ -1,0 +1,39 @@
+.highlighter {
+    height: 100%;
+
+
+    &.highlighter {
+        margin-top: 0;
+        height: 100%;
+
+        .code-preview {
+            padding: 0;
+            height: 100%;
+        }
+
+        .code-preview__content {
+            height: 100% !important;
+            max-height: none !important;
+            overflow: hidden;
+
+            .code-preview__content__code-wrapper {
+                height: 100% !important;
+                max-height: none !important;
+                overflow: hidden;
+                margin: 0;
+
+
+                .shiki {
+                    height: 100% !important;
+                    min-height: 350px;
+                    overflow: auto;
+
+                    code {
+                        font-size: 0.725rem;
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+    }
+}

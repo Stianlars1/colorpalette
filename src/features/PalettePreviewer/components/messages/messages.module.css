@@ -1,0 +1,39 @@
+.wrapper {
+  margin-top: 2rem;
+  padding: 0.65rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 1px hsl(var(--border)/0.75);
+}
+.wrapper .content {
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  gap: 0.65rem;
+}
+.wrapper .content .icon {
+  color: hsl(var(--foreground));
+  display: inline;
+  height: fit-content;
+}
+.wrapper .content .description {
+  margin: 0;
+}
+
+.error {
+  background: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+.info {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.success {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+/*# sourceMappingURL=messages.module.css.map */

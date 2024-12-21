@@ -1,0 +1,83 @@
+.wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todosList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1.5rem 1rem;
+  background-color: hsl(var(--secondary));
+  border-radius: 1rem;
+  box-shadow: 0 0 0 1px hsl(var(--border));
+  width: fit-content;
+  margin: 0;
+}
+.todosList .title {
+  font-size: 1.1rem;
+  color: hsl(var(--foreground));
+  text-align: center;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+.todosList .inputItem {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem !important;
+  border-radius: 4px;
+}
+.todosList .inputItem .input {
+  flex: 1 1 80%;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px hsl(var(--border));
+}
+.todosList .inputItem .input:focus-within, .todosList .inputItem .input:focus {
+  box-shadow: unset;
+  border-color: hsl(var(--primary));
+}
+.todosList .inputItem .addButtonWrapper {
+  outline: none;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+}
+.todosList .inputItem .addButtonWrapper .addButton {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.todosList .inputItem .addButtonWrapper .addButton:hover {
+  background-color: hsl(var(--primary)/0.75);
+}
+.todosList .inputItem .addButtonWrapper:focus .addButton {
+  box-shadow: unset;
+  outline: 2px solid hsl(var(--primary));
+}
+.todosList .todoItem {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+.todosList .todoItem .completedText {
+  text-decoration: line-through;
+}
+
+/*# sourceMappingURL=messages.module.css.map */

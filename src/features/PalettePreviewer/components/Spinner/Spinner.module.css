@@ -1,0 +1,24 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner .loader {
+  border: 2px solid hsl(var(--foreground));
+  border-top: 2px solid hsl(var(--background));
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=Spinner.module.css.map */

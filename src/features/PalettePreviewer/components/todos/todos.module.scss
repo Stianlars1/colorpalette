@@ -1,0 +1,98 @@
+.wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todosList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding: 1.5rem 1rem;
+  background-color: hsl(var(--secondary));
+
+  border-radius: 1rem;
+  box-shadow: 0 0 0 1px hsl(var(--border));
+
+  width: fit-content;
+  margin: 0;
+
+  .title {
+    font-size: 1.1rem;
+    color: hsl(var(--foreground));
+    text-align: center;
+    align-self: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .inputItem {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem !important;
+    border-radius: 4px;
+
+    .input {
+      flex: 1 1 80%;
+
+      border-radius: 4px;
+      box-shadow: 0 0 0 1px hsl(var(--border));
+
+      &:focus-within,
+      &:focus {
+        box-shadow: unset;
+        border-color: hsl(var(--primary));
+      }
+    }
+
+    .addButtonWrapper {
+      outline: none;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+
+      .addButton {
+        flex: 0 0 auto;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: hsl(var(--primary) / 0.75);
+        }
+      }
+    }
+
+    .addButtonWrapper:focus {
+      .addButton {
+        box-shadow: unset;
+        outline: 2px solid hsl(var(--primary));
+      }
+    }
+  }
+
+  .todoItem {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+
+    .completedText {
+      text-decoration: line-through;
+    }
+  }
+}
