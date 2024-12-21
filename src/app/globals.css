@@ -11,6 +11,7 @@
 
 :root {
     --max-width: 1024px;
+    --code-export-editor-height: 200px;
 }
 
 

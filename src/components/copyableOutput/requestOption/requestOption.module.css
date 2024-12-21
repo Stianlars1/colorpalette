@@ -3,10 +3,11 @@
     flex-direction: column;
     gap: 0.25rem;
     font-size: 0.875rem;
+    padding: 0;
 }
 
 .expandButton {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: left;
     width: fit-content;
     padding: 0;

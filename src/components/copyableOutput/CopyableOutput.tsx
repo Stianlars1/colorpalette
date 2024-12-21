@@ -16,6 +16,8 @@ import { debounce } from "@/utils/debounce";
 import { cn } from "@/lib/utils";
 import { colorFormats, templates } from "@/components/copyableOutput/lib";
 import RequestExportOption from "@/components/copyableOutput/requestOption/requestOption";
+import { Button } from "@/components/ui/button";
+import { cx } from "class-variance-authority";
 
 interface CopyableOutputProps {
   appearance: ThemeType;
@@ -42,7 +44,7 @@ export const CopyableOutput = memo(
       dark: ReturnType<typeof generateColorPalette> | null;
     }>({ light: null, dark: null });
     const [isOpen, setIsOpen] = useState(false);
-
+    const [isExpanded, setIsExpanded] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     const [debouncedCode, setDebouncedCode] = useState("");
@@ -183,6 +185,15 @@ export const CopyableOutput = memo(
       };
     }, [dialogRef.current]);
 
+    const handleExpand = () => {
+      setIsExpanded(!isExpanded);
+      const highlighterEl = document.getElementById("stylesheet-output");
+      if (!highlighterEl) return;
+      setTimeout(() => {
+        highlighterEl.scrollIntoView({ behavior: "smooth" });
+      }, 200);
+    };
+
     return (
       <>
         <dialog
@@ -257,22 +268,39 @@ export const CopyableOutput = memo(
                       </label>
                     ))}
                   </div>
+                  <RequestExportOption />
                 </div>
               </div>
 
               {colorPalettes.light && colorPalettes.dark && (
                 <div className={styles.output}>
                   <div className={styles.codeBlock}>
-                    <h2 className={styles.codeBlockTitle}>StyleSheet Output</h2>
+                    <h2
+                      id={"stylesheet-output"}
+                      className={styles.codeBlockTitle}
+                    >
+                      StyleSheet Output
+                    </h2>
 
-                    <div className={styles.syntaxHighlighter}>
+                    <div
+                      className={cx(
+                        styles.syntaxHighlighter,
+                        isExpanded && styles.syntaxExpanded,
+                      )}
+                    >
                       <SyntaxHighlighter code={debouncedCode} />
                     </div>
+                    <Button
+                      className={styles.ghostButton}
+                      variant={"link"}
+                      onClick={handleExpand}
+                    >
+                      {isExpanded ? "Close" : "Expand"}
+                    </Button>
                   </div>
                 </div>
               )}
             </div>
-            <RequestExportOption />
           </div>
         </dialog>
 

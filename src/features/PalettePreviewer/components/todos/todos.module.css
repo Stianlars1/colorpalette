@@ -38,6 +38,7 @@
   flex: 1 1 80%;
   border-radius: 4px;
   box-shadow: 0 0 0 1px hsl(var(--border));
+  color: hsl(var(--gray-1));
 }
 .todosList .inputItem .input:focus-within, .todosList .inputItem .input:focus {
   box-shadow: unset;
@@ -80,4 +81,4 @@
   text-decoration: line-through;
 }
 
-/*# sourceMappingURL=messages.module.css.map */
+/*# sourceMappingURL=todos.module.css.map */

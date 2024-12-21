@@ -22,8 +22,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
-  background-color: hsl(var(--accent-6)/0.05);
-  backdrop-filter: blur(5px);
+  background-color: hsl(var(--accent-4)/0.05);
+  backdrop-filter: blur(10px);
   overflow: auto;
   display: none;
   flex-direction: column;
@@ -150,11 +150,15 @@
   font-style: italic;
 }
 .dialog .wrapper .container .codeBlock .syntaxHighlighter {
-  min-height: 350px;
+  max-height: var(--code-export-editor-height);
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   background-color: #18181b;
   border-radius: 0.5rem;
+}
+.dialog .wrapper .container .codeBlock .syntaxExpanded {
+  max-height: unset;
+  height: 100%;
 }
 
 .exportButton {
@@ -176,6 +180,11 @@
 .dialog::backdrop {
   background: hsl(var(--background)/0.85);
   overflow: hidden;
+}
+
+.ghostButton {
+  width: fit-content;
+  margin: 0 auto;
 }
 
 @media (prefers-color-scheme: dark) {

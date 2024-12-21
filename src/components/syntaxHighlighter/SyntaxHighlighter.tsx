@@ -18,7 +18,6 @@ export const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const previousCodeRef = useRef<string>(code);
   const transitionTimeoutRef = useRef<NodeJS.Timeout>();
-
   useEffect(() => {
     setMounted(true);
   }, []);
