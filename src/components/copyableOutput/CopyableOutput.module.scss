@@ -13,8 +13,7 @@
 
 .dialog {
   border: 1px solid hsl(var(--border));
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  /*0 4px 6px hsl(0 0% 0% / 20%);*/
+  box-shadow: 0 4px 6px hsl(0 0% 0% / 20%);
 
   //box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   width: min(700px, 100%);
@@ -30,9 +29,40 @@
   background-color: hsl(var(--accent-6) / 0.05);
   backdrop-filter: blur(5px);
 
-  overflow: hidden; // Prevent dialog from scrolling
+  overflow: auto; // Prevent dialog from scrolling
   display: none;
   flex-direction: column;
+
+  scrollbar-width: none;
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  // You can also add these for completeness
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  // For IE/Edge
+  -ms-overflow-style: none;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin: 0;
+    height: 100%;
+  }
 
   .wrapper {
     padding: 1rem;
@@ -179,4 +209,11 @@
 .dialog::backdrop {
   background: hsl(var(--background) / 0.85);
   overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dialog {
+    background-color: hsl(var(--accent-4) / 0.1);
+    backdrop-filter: blur(12px);
+  }
 }

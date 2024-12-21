@@ -15,6 +15,7 @@ import { ThemeType } from "@/types/theme";
 import { debounce } from "@/utils/debounce";
 import { cn } from "@/lib/utils";
 import { colorFormats, templates } from "@/components/copyableOutput/lib";
+import RequestExportOption from "@/components/copyableOutput/requestOption/requestOption";
 
 interface CopyableOutputProps {
   appearance: ThemeType;
@@ -271,9 +272,8 @@ export const CopyableOutput = memo(
                 </div>
               )}
             </div>
+            <RequestExportOption />
           </div>
-
-          <p>Request export option</p>
         </dialog>
 
         <button className={styles.exportButton} onClick={handleShowModal}>

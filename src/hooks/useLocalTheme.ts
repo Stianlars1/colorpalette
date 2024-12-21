@@ -1,9 +1,9 @@
 "use client";
 export const useLocalTheme = () => {
-  let accent = "#00ffcc";
-  let gray = "#8b8d98";
-  let background = "#ffffff";
-  let darkBackground = "#111111";
+  let accent = "#3c77f6";
+  let gray = "#d3d4d5";
+  let background = "##faf9f9";
+  let darkBackground = "#050505";
 
   if (typeof window !== "undefined") {
     accent =

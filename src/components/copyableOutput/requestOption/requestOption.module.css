@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.expandButton {
+    margin-top: 1rem;
+    text-align: left;
+    width: fit-content;
+    padding: 0;
+}
+
+.openIssueButton {
+    width: fit-content;
+
+}
+
