@@ -22,8 +22,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
-  background-color: hsl(var(--accent-4)/0.05);
-  backdrop-filter: blur(10px);
+  background-color: hsl(var(--accent-2)/0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   overflow: auto;
   display: none;
   flex-direction: column;
@@ -40,17 +41,6 @@
 }
 .dialog::-webkit-scrollbar-thumb {
   display: none;
-}
-@media (max-width: 768px) {
-  .dialog {
-    width: 100%;
-    border-radius: 0;
-    top: 0;
-    left: 0;
-    transform: none;
-    margin: 0;
-    height: 100%;
-  }
 }
 .dialog .wrapper {
   padding: 1rem;
@@ -151,10 +141,13 @@
 }
 .dialog .wrapper .container .codeBlock .syntaxHighlighter {
   max-height: var(--code-export-editor-height);
+  min-height: var(--code-export-editor-height);
   height: 100%;
   overflow: auto;
   background-color: #18181b;
   border-radius: 0.5rem;
+  border: 1px solid #e4e4e7;
+  padding: 0;
 }
 .dialog .wrapper .container .codeBlock .syntaxExpanded {
   max-height: unset;
@@ -187,10 +180,20 @@
   margin: 0 auto;
 }
 
+.backdropFallback {
+  position: fixed;
+  inset: 0;
+  background: hsl(var(--background)/0.85);
+}
+
 @media (prefers-color-scheme: dark) {
   .dialog {
     background-color: hsl(var(--accent-4)/0.1);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .dialog .wrapper .container .codeBlock .syntaxHighlighter {
+    border-color: #27272a;
   }
 }
 

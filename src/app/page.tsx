@@ -10,9 +10,11 @@ import { ColorFields } from "@/components/ui/colorFields/colorFields";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { CopyableOutput } from "@/components/copyableOutput/CopyableOutput";
+import { GradientPageBackground } from "@/components/GradientPageBackground/GradientPageBackground";
 
 export default function Home() {
-  const { accent, gray, background, darkBackground } = useLocalTheme();
+  const { accent, gradientColor, gray, background, darkBackground } =
+    useLocalTheme();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [accentColor, setAccentColor] = useState(accent);
@@ -35,7 +37,13 @@ export default function Home() {
     <>
       <main className="container min-h-screen min-w-full p-0 m-0">
         <div className={" flex  flex-col gap-8 pageContentWrapper"}>
-          <Header theme={theme as ThemeType} toggleTheme={toggleTheme} />
+          <Header
+            backgroundColor={
+              theme === "light" ? backgroundColor : darkmodeBackgroundColor
+            }
+            theme={theme as ThemeType}
+            toggleTheme={toggleTheme}
+          />
 
           <ColorFields
             accent={{
@@ -92,7 +100,9 @@ export default function Home() {
           darkmodeBackgroundColor={darkmodeBackgroundColor}
         />
       </main>
-      <div className={"backgroundGradient"} />
+      <GradientPageBackground
+        theme={(theme as ThemeType) ?? ("light" as ThemeType)}
+      />
     </>
   );
 }

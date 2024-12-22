@@ -1,12 +1,16 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { ThemeType } from "@/types/theme";
+import { isSafariIOS } from "@/lib/isSafari";
+import { updateThemeColor } from "@/lib/updateThemeColor";
 
 export const Header = ({
   theme,
+  backgroundColor,
   toggleTheme,
 }: {
   theme: ThemeType;
+  backgroundColor: string;
   toggleTheme: (theme: ThemeType) => void;
 }) => {
   const handleGoToCopy = (event: React.MouseEvent) => {
@@ -17,8 +21,17 @@ export const Header = ({
       "export_colors_dialog",
     ) as HTMLDialogElement;
 
+    const dialogbackdropFallback = document.getElementById(
+      "export_colors_dialog_backdrop",
+    );
+
     if (dialogEl) {
+      updateThemeColor(backgroundColor);
       dialogEl.showModal();
+
+      if (isSafariIOS() && dialogbackdropFallback) {
+        dialogbackdropFallback.style.display = "block";
+      }
     }
   };
   return (

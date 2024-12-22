@@ -60,17 +60,6 @@ html {
     }
 }
 
-.backgroundGradient {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 500px;
-    opacity: 0.9;
-    background: linear-gradient(to bottom, hsl(var(--accent-4)) , transparent );
-    z-index: -1;
-}
 
 .pageContentWrapper {
     padding: 2rem;
@@ -81,10 +70,6 @@ html {
         padding: 1rem;
     }
 }
-
-
-
-
 
 
 body:has(.export_colors_dialog[open]) {

@@ -18,6 +18,7 @@ import { colorFormats, templates } from "@/components/copyableOutput/lib";
 import RequestExportOption from "@/components/copyableOutput/requestOption/requestOption";
 import { Button } from "@/components/ui/button";
 import { cx } from "class-variance-authority";
+import { updateThemeColor } from "@/lib/updateThemeColor";
 
 interface CopyableOutputProps {
   appearance: ThemeType;
@@ -46,7 +47,7 @@ export const CopyableOutput = memo(
     const [isOpen, setIsOpen] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
-
+    const backdropRef = useRef<HTMLDivElement>(null);
     const [debouncedCode, setDebouncedCode] = useState("");
 
     // Debounced update for syntax highlighting
@@ -158,13 +159,26 @@ export const CopyableOutput = memo(
     ]);
 
     const handleShowModal = () => {
-      const modalElement = dialogRef.current;
-      if (!modalElement) return;
+      if (!dialogRef.current || !backdropRef.current) return;
 
-      if (modalElement.open) {
-        modalElement.close();
+      if (dialogRef.current.open) {
+        dialogRef.current.close();
+        backdropRef.current.style.display = "none";
+        if (colorPalettes.light && colorPalettes.dark) {
+          updateThemeColor(
+            appearance === "light"
+              ? colorPalettes.light?.accentPalette.scale[3]
+              : colorPalettes.dark?.accentPalette.scale[3],
+          );
+        }
       } else {
-        modalElement.showModal();
+        updateThemeColor(
+          appearance === "light" ? backgroundColor : darkmodeBackgroundColor,
+        );
+
+        console.log("open");
+        dialogRef.current.showModal();
+        backdropRef.current.style.display = "block";
       }
     };
     useEffect(() => {
@@ -172,18 +186,20 @@ export const CopyableOutput = memo(
       if (!dialog) return;
 
       const handleOutsideClick = (e: MouseEvent) => {
-        // If the dialog itself is clicked (not the content inside it),
-        // it means the user clicked on the backdrop.
         if (e.target === dialog) {
           dialog.close();
+          if (backdropRef.current) {
+            backdropRef.current.style.display = "none";
+          }
         }
       };
 
       dialog.addEventListener("click", handleOutsideClick);
+
       return () => {
         dialog.removeEventListener("click", handleOutsideClick);
       };
-    }, [dialogRef.current]);
+    }, [dialogRef.current, backdropRef.current]);
 
     const handleExpand = () => {
       setIsExpanded(!isExpanded);
@@ -303,6 +319,13 @@ export const CopyableOutput = memo(
             </div>
           </div>
         </dialog>
+
+        <div
+          id={"export_colors_dialog_backdrop"}
+          ref={backdropRef}
+          className={styles.backdropFallback}
+          style={{ display: "none" }}
+        />
 
         <button className={styles.exportButton} onClick={handleShowModal}>
           Export colors

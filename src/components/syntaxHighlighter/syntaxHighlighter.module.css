@@ -26,5 +26,8 @@
   background-color: #18181b;
   overflow: hidden;
 }
+.highlighter.highlighter {
+  padding: 0;
+}
 
 /*# sourceMappingURL=syntaxHighlighter.module.css.map */

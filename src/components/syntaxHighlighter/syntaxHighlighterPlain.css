@@ -7,7 +7,7 @@
         height: 100%;
 
         .code-preview {
-            padding: 0;
+            padding: 0 !important;
             height: 100%;
         }
 
@@ -21,12 +21,22 @@
                 max-height: none !important;
                 overflow: hidden;
                 margin: 0;
+                border: none !important;
+                &.code-preview__content__code-wrapper {
+                    border: none;
+                }
 
 
                 .shiki {
+                    border: none;
                     height: 100% !important;
                     max-height: unset;
                     overflow: auto;
+
+                    &.shiki {
+                        border: none;
+                    }
+
 
                     code {
                         font-size: 0.725rem;

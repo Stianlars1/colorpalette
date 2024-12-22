@@ -43,6 +43,7 @@ const ColorField: React.FC<ColorFieldProps> = ({
           `radix_custom_color_${label.toLowerCase()}`,
           newColor,
         );
+
         onChange(newColor);
       }, 6),
     [label, onChange],
@@ -85,7 +86,7 @@ const ColorField: React.FC<ColorFieldProps> = ({
             }
             onBlur?.();
           }}
-          className="pl-10 uppercase bg-gray-1 dark:bg-grayDark-1 text-gray-12 dark:text-grayDark-12 border-gray-6 dark:border-grayDark-6"
+          className="pl-10 text-[16px] uppercase bg-gray-1 dark:bg-grayDark-1 text-gray-12 dark:text-grayDark-12 border-gray-6 dark:border-grayDark-6"
           placeholder="#FFFFFF"
         />
       </div>

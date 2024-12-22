@@ -4,6 +4,7 @@ export const useLocalTheme = () => {
   let gray = "#d3d4d5";
   let background = "#faf9f9";
   let darkBackground = "#050505";
+  let gradientColor = "#ddeaff";
 
   if (typeof window !== "undefined") {
     accent =
@@ -16,7 +17,10 @@ export const useLocalTheme = () => {
     darkBackground =
       window.localStorage?.getItem("radix_custom_color_dark-mode background") ??
       darkBackground;
+    gradientColor =
+      window.localStorage?.getItem("radix_custom_color_gradient") ??
+      gradientColor;
   }
 
-  return { accent, gray, background, darkBackground };
+  return { accent, gradientColor, gray, background, darkBackground };
 };

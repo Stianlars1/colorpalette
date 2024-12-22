@@ -4,6 +4,7 @@ import { generateColorPalette } from "@/lib/generateColorPalette";
 import { useEffect, useState } from "react";
 import ColorGrid from "./ColorGrid";
 import { ThemeType } from "@/types/theme";
+import { updateThemeColor } from "@/lib/updateThemeColor";
 
 const NewColorPaletteGenerator = ({
   appearance,
@@ -48,6 +49,12 @@ const NewColorPaletteGenerator = ({
       gray: grayColor,
       accent: accentColor,
     });
+
+    localStorage.setItem(
+      `radix_custom_color_gradient`,
+      defaultPalette.accentPalette.scale[3],
+    );
+    updateThemeColor(defaultPalette.accentPalette.scale[3]);
 
     setGeneratedPalette(defaultPalette);
     setGeneratedLightPalette(lightPalette);

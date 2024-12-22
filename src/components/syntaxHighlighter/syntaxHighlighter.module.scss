@@ -26,4 +26,7 @@
   position: relative;
   background-color: #18181b;
   overflow: hidden;
+  &.highlighter {
+    padding: 0;
+  }
 }
