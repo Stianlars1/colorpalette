@@ -23,7 +23,6 @@ import { Button } from "@/components/ui/button";
 import { cx } from "class-variance-authority";
 import { updateThemeColor } from "@/lib/updateThemeColor";
 import { isSafariIOS } from "@/lib/isSafari";
-import { usePaletteStorage } from "@/hooks/usePaletteStorage";
 
 interface CopyableOutputProps {
   appearance: ThemeType;
@@ -53,8 +52,6 @@ export const CopyableOutput = memo(
     const dialogRef = useRef<HTMLDialogElement>(null);
     const backdropRef = useRef<HTMLDivElement>(null);
     const [debouncedCode, setDebouncedCode] = useState("");
-    const { savePalette } = usePaletteStorage();
-    const isLight = appearance === "light";
     // Debounced update for syntax highlighting
     const updateSyntaxHighlighter = useMemo(
       () =>
@@ -180,7 +177,6 @@ export const CopyableOutput = memo(
       } else {
         updateThemeColor(appearance, backgroundColor, darkmodeBackgroundColor);
 
-        console.log("open");
         dialogRef.current.showModal();
         if (isSafariIOS()) {
           backdropRef.current.style.display = "block";
@@ -190,6 +186,15 @@ export const CopyableOutput = memo(
     useEffect(() => {
       const dialog = dialogRef.current;
       if (!dialog) return;
+      const handleDialogClose = () => {
+        if (colorPalettes.light && colorPalettes.dark) {
+          updateThemeColor(
+            appearance,
+            colorPalettes.light?.accentPalette.scale[3],
+            colorPalettes.dark?.accentPalette.scale[3],
+          );
+        }
+      };
 
       const handleOutsideClick = (e: MouseEvent) => {
         if (e.target === dialog) {
@@ -197,15 +202,24 @@ export const CopyableOutput = memo(
           if (backdropRef.current) {
             backdropRef.current.style.display = "none";
           }
+          if (colorPalettes.light && colorPalettes.dark) {
+            updateThemeColor(
+              appearance,
+              colorPalettes.light?.accentPalette.scale[3],
+              colorPalettes.dark?.accentPalette.scale[3],
+            );
+          }
         }
       };
 
       dialog.addEventListener("click", handleOutsideClick);
+      dialog.addEventListener("close", handleDialogClose);
 
       return () => {
         dialog.removeEventListener("click", handleOutsideClick);
+        dialog.removeEventListener("close", handleDialogClose);
       };
-    }, [dialogRef.current, backdropRef.current]);
+    }, [dialogRef.current, backdropRef.current, appearance, colorPalettes]);
 
     const handleExpand = () => {
       setIsExpanded(!isExpanded);

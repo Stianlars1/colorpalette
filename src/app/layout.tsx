@@ -17,10 +17,7 @@ const geistMono = localFont({
   weight: "100 900",
   display: "swap",
 });
-export const metadata = {
-  title: "Color Palette Creator",
-  description: "Create a custom color palette with Radix Colors",
-};
+export const metadata = {};
 
 export default function RootLayout({
   children,

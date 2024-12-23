@@ -64,13 +64,6 @@ const NewColorPaletteGenerator = ({
       darkPalette.accentPalette.scale[3],
     );
 
-    console.log(
-      "new color palette generator",
-      defaultPalette,
-      lightPalette,
-      darkPalette,
-    );
-
     setGeneratedPalette(defaultPalette);
     setGeneratedLightPalette(lightPalette);
     setGeneratedDarkPalette(darkPalette);
