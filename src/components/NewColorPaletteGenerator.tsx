@@ -11,11 +11,13 @@ const NewColorPaletteGenerator = ({
   accentColor,
   grayColor,
   backgroundColor,
+  darkmodeBackgroundColor,
 }: {
   appearance: ThemeType;
   accentColor: string;
   grayColor: string;
   backgroundColor: string;
+  darkmodeBackgroundColor: string;
 }) => {
   const [generatedPalette, setGeneratedPalette] = useState<ReturnType<
     typeof generateColorPalette
@@ -29,10 +31,12 @@ const NewColorPaletteGenerator = ({
     typeof generateColorPalette
   > | null>(null);
 
+  const isLightMode = appearance === "light";
+
   useEffect(() => {
     const defaultPalette = generateColorPalette({
       appearance,
-      background: backgroundColor,
+      background: isLightMode ? backgroundColor : darkmodeBackgroundColor,
       gray: grayColor,
       accent: accentColor,
     });
@@ -45,16 +49,27 @@ const NewColorPaletteGenerator = ({
     });
     const darkPalette = generateColorPalette({
       appearance: "dark",
-      background: backgroundColor,
+      background: darkmodeBackgroundColor,
       gray: grayColor,
       accent: accentColor,
     });
 
     localStorage.setItem(
       `radix_custom_color_gradient`,
-      defaultPalette.accentPalette.scale[3],
+      defaultPalette.accentPalette.scale[3].toLowerCase(),
     );
-    updateThemeColor(defaultPalette.accentPalette.scale[3]);
+    updateThemeColor(
+      appearance,
+      lightPalette.accentPalette.scale[3],
+      darkPalette.accentPalette.scale[3],
+    );
+
+    console.log(
+      "new color palette generator",
+      defaultPalette,
+      lightPalette,
+      darkPalette,
+    );
 
     setGeneratedPalette(defaultPalette);
     setGeneratedLightPalette(lightPalette);

@@ -172,13 +172,13 @@ export const CopyableOutput = memo(
         backdropRef.current.style.display = "none";
         if (colorPalettes.light && colorPalettes.dark) {
           updateThemeColor(
-            isLight
-              ? colorPalettes.light?.accentPalette.scale[3]
-              : colorPalettes.dark?.accentPalette.scale[3],
+            appearance,
+            colorPalettes.light?.accentPalette.scale[3],
+            colorPalettes.dark?.accentPalette.scale[3],
           );
         }
       } else {
-        updateThemeColor(isLight ? backgroundColor : darkmodeBackgroundColor);
+        updateThemeColor(appearance, backgroundColor, darkmodeBackgroundColor);
 
         console.log("open");
         dialogRef.current.showModal();

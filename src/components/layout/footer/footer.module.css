@@ -1,16 +1,14 @@
 .footer {
   width: 100%;
   padding: 4rem 0 0;
-  background: linear-gradient(to bottom, transparent, hsl(var(--accent-5)));
   border-top: 1px solid hsl(var(--gray-6));
 }
 .footer .footerContent {
-  max-width: var(--max-width);
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 4rem;
-  padding: 0 2rem 2rem;
+  padding: 0 calc((100vw - var(--max-width)) / 2) 2rem;
+  background: linear-gradient(to bottom, transparent, hsl(var(--accent-4)/0.85));
 }
 .footer .footerContent .brandSection {
   display: flex;
@@ -74,7 +72,7 @@
 }
 
 .attribution {
-  border-top: 1px solid hsl(var(--accent-5)/0.85);
+  border-top: 1px solid hsl(var(--accent-4)/0.9);
   padding: 2rem 2rem 2rem;
   text-align: center;
   background: linear-gradient(to bottom, hsl(var(--accent-4)/0.85), hsl(var(--background)));
@@ -106,6 +104,7 @@
 
 .copyright {
   color: hsl(var(--foreground));
+  text-wrap: nowrap;
   opacity: 0.7;
   font-size: 0.875rem;
 }
@@ -135,8 +134,9 @@
 }
 
 @media (max-width: 1024px) {
-  .footerContent {
+  .footer .footerContent {
     gap: 3rem;
+    padding: 0 2rem 2rem;
   }
   .linksSection {
     grid-template-columns: repeat(2, 1fr);

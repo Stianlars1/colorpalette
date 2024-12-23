@@ -185,8 +185,6 @@ export function generateColorPalette({
     appearance,
   );
 
-  console.log(accentPalette, grayPalette);
-
   return {
     accentPalette,
     grayPalette,

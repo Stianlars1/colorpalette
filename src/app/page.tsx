@@ -11,7 +11,6 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { CopyableOutput } from "@/components/copyableOutput/CopyableOutput";
 import { GradientPageBackground } from "@/components/GradientPageBackground/GradientPageBackground";
-import { updateThemeColor } from "@/lib/updateThemeColor";
 import { Footer } from "@/components/layout/footer/footer";
 
 export default function Home() {
@@ -32,7 +31,6 @@ export default function Home() {
   }, []);
 
   const toggleTheme = (newTheme: ThemeType) => {
-    updateThemeColor(isLightMode ? darkmodeBackgroundColor : backgroundColor);
     setTheme(newTheme);
   };
 
@@ -43,9 +41,8 @@ export default function Home() {
       <main className="container min-h-screen min-w-full p-0 m-0">
         <div className={" flex  flex-col gap-8 pageContentWrapper"}>
           <Header
-            backgroundColor={
-              isLightMode ? backgroundColor : darkmodeBackgroundColor
-            }
+            backgroundColor={backgroundColor}
+            darkmodeBackgroundColor={darkmodeBackgroundColor}
             theme={theme as ThemeType}
             toggleTheme={toggleTheme}
           />
@@ -76,9 +73,8 @@ export default function Home() {
             appearance={theme as ThemeType}
             accentColor={accentColor}
             grayColor={grayColor}
-            backgroundColor={
-              isLightMode ? backgroundColor : darkmodeBackgroundColor
-            }
+            backgroundColor={backgroundColor}
+            darkmodeBackgroundColor={darkmodeBackgroundColor}
           />
 
           <Link

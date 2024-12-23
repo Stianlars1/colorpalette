@@ -1,18 +1,55 @@
-export const updateThemeColor = (color: string) => {
-  // This finds the meta tag with name="theme-color"
+import { ThemeType } from "@/types/theme";
 
-  const metaTag = document.querySelector('meta[name="theme-color"]');
+export const updateThemeColor = (
+  theme: ThemeType,
+  lightColor: string,
+  darkColor: string,
+) => {
+  // First, remove existing meta tags
+  document
+    .querySelectorAll('meta[name="theme-color"]')
+    .forEach((tag) => tag.remove());
 
-  // If the meta tag exists, update its content attribute with the background color
-  if (metaTag) {
-    metaTag.setAttribute("content", color);
+  const isSystemDarkMode = window.matchMedia(
+    "(prefers-color-scheme: dark)",
+  ).matches;
+
+  // For Safari on macOS in dark mode, we need a special handling
+  if (isSystemDarkMode) {
+    // When system is dark, Safari prioritizes the dark mode meta tag
+    // So we need to set both the base and dark mode tag to match our desired color
+    const currentColor = theme === "dark" ? darkColor : lightColor;
+
+    // Base tag
+    const baseTag = document.createElement("meta");
+    baseTag.setAttribute("name", "theme-color");
+    baseTag.setAttribute("content", currentColor);
+    document.head.appendChild(baseTag);
+
+    // Dark mode tag - this is what Safari will actually use
+    const darkTag = document.createElement("meta");
+    darkTag.setAttribute("name", "theme-color");
+    darkTag.setAttribute("media", "(prefers-color-scheme: dark)");
+    darkTag.setAttribute("content", currentColor); // Use current theme color instead of darkColor
+    document.head.appendChild(darkTag);
   } else {
-    // If the meta tag does not exist, create a new one and append it to the head element
-    const newMetaTag = document.createElement("meta");
-    newMetaTag.setAttribute("name", "theme-color");
+    // In light mode, Safari behaves normally
+    const baseTag = document.createElement("meta");
+    baseTag.setAttribute("name", "theme-color");
+    baseTag.setAttribute("content", theme === "dark" ? darkColor : lightColor);
+    document.head.appendChild(baseTag);
 
-    newMetaTag.setAttribute("color", color);
-    //document.getElementsByTagName("head")[0].appendChild(newMetaTag);
-    document.head.appendChild(newMetaTag);
+    // Add media query tags
+    const darkTag = document.createElement("meta");
+    darkTag.setAttribute("name", "theme-color");
+    darkTag.setAttribute("media", "(prefers-color-scheme: dark)");
+    darkTag.setAttribute("content", darkColor);
+    document.head.appendChild(darkTag);
+
+    const lightTag = document.createElement("meta");
+    lightTag.setAttribute("name", "theme-color");
+    lightTag.setAttribute("media", "(prefers-color-scheme: light)");
+    lightTag.setAttribute("content", lightColor);
+    document.head.appendChild(lightTag);
   }
 };

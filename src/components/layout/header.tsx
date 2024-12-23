@@ -7,10 +7,12 @@ import { updateThemeColor } from "@/lib/updateThemeColor";
 export const Header = ({
   theme,
   backgroundColor,
+  darkmodeBackgroundColor,
   toggleTheme,
 }: {
   theme: ThemeType;
   backgroundColor: string;
+  darkmodeBackgroundColor: string;
   toggleTheme: (theme: ThemeType) => void;
 }) => {
   const handleGoToCopy = (event: React.MouseEvent) => {
@@ -26,7 +28,8 @@ export const Header = ({
     );
 
     if (dialogEl) {
-      updateThemeColor(backgroundColor);
+      console.log("open dialog");
+      updateThemeColor(theme, backgroundColor, darkmodeBackgroundColor);
       dialogEl.showModal();
 
       if (isSafariIOS() && dialogbackdropFallback) {

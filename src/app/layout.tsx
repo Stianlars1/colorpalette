@@ -2,7 +2,6 @@ import { Providers } from "@/components/providers";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
-import { Viewport } from "next";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,19 +20,6 @@ const geistMono = localFont({
 export const metadata = {
   title: "Color Palette Creator",
   description: "Create a custom color palette with Radix Colors",
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    {
-      media: "(prefers-color-scheme: light)",
-      color: "#DDEAFF",
-    },
-    {
-      media: "(prefers-color-scheme: dark)",
-      color: "#DDEAFF",
-    },
-  ],
 };
 
 export default function RootLayout({
