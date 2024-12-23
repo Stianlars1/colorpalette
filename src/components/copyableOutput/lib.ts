@@ -1,4 +1,4 @@
-export const templates = [
+export const stylesheetPresets = [
   "radix",
   "shadcn",
   "tailwind",

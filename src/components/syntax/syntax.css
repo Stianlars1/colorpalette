@@ -1,0 +1,7 @@
+.code-preview {
+    &.code-preview {
+    padding: 0;
+        max-width: unset;
+        max-height: unset;
+    }
+}

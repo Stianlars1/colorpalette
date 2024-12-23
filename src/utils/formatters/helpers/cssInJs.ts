@@ -1,6 +1,6 @@
 import { FormatterFunction } from "@/utils/formatters/formatters";
 import { generateColorPalette } from "@/lib/generateColorPalette";
-import { convertPalette } from "@/utils/colorUtils";
+import { convertColor, convertPalette } from "@/utils/colorUtils";
 
 export const cssInJsFormatter: FormatterFunction = (
   lightPalette,
@@ -8,9 +8,10 @@ export const cssInJsFormatter: FormatterFunction = (
   { colorFormat },
 ) => {
   const formatPalette = (palette: ReturnType<typeof generateColorPalette>) => {
-    const { accentPalette, grayPalette } = palette;
+    const { accentPalette, grayPalette, background } = palette;
     const accentColors = convertPalette(accentPalette.scale, colorFormat);
     const grayColors = convertPalette(grayPalette.scale, colorFormat);
+    const backgroundColor = convertColor(background, colorFormat);
 
     return `{
   accent: {
@@ -42,7 +43,7 @@ export const cssInJsFormatter: FormatterFunction = (
     1000: '${grayColors[11]}',
   },
   semantic: {
-    background: '${palette.background}',
+    background: '${backgroundColor}',
     foreground: '${grayColors[11]}',
     primary: '${accentColors[8]}',
     secondary: '${grayColors[8]}',

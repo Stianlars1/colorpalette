@@ -1,0 +1,61 @@
+.pageContainer {
+  max-width: 768px;
+  box-sizing: content-box;
+  padding: 20px;
+  margin: 0 auto;
+  background: hsl(var(--background));
+}
+.pageContainer h1 {
+  color: hsl(var(--foreground));
+  font-size: 1.75rem; /* 28px */
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pageContainer h2 {
+  color: hsl(var(--foreground)/0.9);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  line-height: 1.35;
+}
+.pageContainer h3 {
+  color: hsl(var(--foreground)/0.8);
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  line-height: 1.4;
+}
+.pageContainer h4 {
+  color: hsl(var(--foreground)/0.7);
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+  line-height: 1.45;
+}
+.pageContainer h5 {
+  color: hsl(var(--foreground)/0.6);
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  line-height: 1.5;
+}
+.pageContainer h6 {
+  color: hsl(var(--foreground)/0.5);
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  line-height: 1.55;
+}
+.pageContainer a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 400;
+  font-weight: inherit;
+}
+.pageContainer p,
+.pageContainer li {
+  color: hsl(var(--foreground)/1);
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+/*# sourceMappingURL=pageContainer.module.css.map */

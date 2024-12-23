@@ -12,16 +12,17 @@ export const cssVariablesFormatter: FormatterFunction = (
     const accentColors = convertPalette(accentPalette.scale, colorFormat);
     const grayColors = convertPalette(grayPalette.scale, colorFormat);
     const accentContrast = convertColor(
-      accentPalette?.contrast ?? "#000",
+      accentPalette?.contrast ?? accentPalette.scale[11],
       colorFormat,
     );
     const grayContrast = convertColor(
-      grayPalette?.contrast ?? "#000",
+      grayPalette?.contrast ?? grayPalette.scale[11],
       colorFormat,
     );
+    const backgroundColor = convertColor(background, colorFormat);
 
     return ` /* General Colors */ 
-   --background: ${background};
+   --background: ${backgroundColor};
    --foreground: ${grayColors[11]};  
     
     /* Accent Colors */ 

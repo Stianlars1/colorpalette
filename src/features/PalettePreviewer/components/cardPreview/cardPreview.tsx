@@ -28,7 +28,7 @@ export const CardPreview = () => {
       </div>
 
       <Link
-        aria-label={"Click to scroll to the top of the page"}
+        aria-label={"Click to scroll to the top of the pageContainer"}
         className={styles.link}
         href={"#top"}
       />

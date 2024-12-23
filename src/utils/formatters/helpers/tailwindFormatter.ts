@@ -14,19 +14,19 @@ export const tailwindFormatter: FormatterFunction = (
   const darkAccentColors = convertPalette(darkAccent.scale, colorFormat);
   const darkGrayColors = convertPalette(darkGray.scale, colorFormat);
   const accentContrastLight = convertColor(
-    lightAccent?.contrast ?? "#000",
+    lightAccent?.contrast ?? lightAccent.scale[11],
     colorFormat,
   );
   const grayContrastLight = convertColor(
-    lightGray?.contrast ?? "#000",
+    lightGray?.contrast ?? lightGray.scale[11],
     colorFormat,
   );
   const accentContrastDark = convertColor(
-    darkAccent?.contrast ?? "#000",
+    darkAccent?.contrast ?? darkAccent.scale[11],
     colorFormat,
   );
   const grayContrastDark = convertColor(
-    darkGray?.contrast ?? "#000",
+    darkGray?.contrast ?? darkGray.scale[11],
     colorFormat,
   );
 

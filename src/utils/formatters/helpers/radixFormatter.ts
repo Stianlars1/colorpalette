@@ -11,17 +11,18 @@ export const formatRadixPalette = (
   const accentColors = convertPalette(accentPalette.scale, colorFormat);
   const grayColors = convertPalette(grayPalette.scale, colorFormat);
   const accentContrast = convertColor(
-    accentPalette?.contrast ?? "#000",
+    accentPalette?.contrast ?? accentColors[11],
     colorFormat,
   );
+  const backgroundColor = convertColor(background, colorFormat);
 
   const grayContrast = convertColor(
-    grayPalette?.contrast ?? "#000",
+    grayPalette?.contrast ?? grayPalette.scale[11],
     colorFormat,
   );
 
   return ` /* General Colors */   
-  --background: ${background};
+  --background: ${backgroundColor};
   --foreground: ${grayColors[11]};
     
   /* Accent Colors */

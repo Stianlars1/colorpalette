@@ -48,8 +48,8 @@
 }
 .dialog .wrapper .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.4rem;
+  right: 0.5rem;
   color: hsl(var(--gray-11));
   width: 18px;
   height: 18px;

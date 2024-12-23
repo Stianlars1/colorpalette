@@ -3,6 +3,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.3;
+  text-wrap: balance;
 }
 .contentWrapper h2 {
   color: hsl(var(--foreground)/0.9);

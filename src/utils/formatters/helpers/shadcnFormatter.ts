@@ -44,7 +44,7 @@ export const formatPaletteSHADCN = (
   const { background: destructive, foreground: destructiveForeground } =
     DESTRUCTIVE_COLORS(appearance, format);
   const accentContrast = convertColor(
-    accentPalette?.contrast ?? "#000",
+    accentPalette?.contrast ?? accentPalette.scale[11],
     format,
   );
 

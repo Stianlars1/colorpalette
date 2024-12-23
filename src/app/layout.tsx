@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import { Viewport } from "next";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 const geistSans = localFont({
@@ -42,6 +43,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <meta name="apple-mobile-web-app-title" content="colorpalette" />
+      </Head>
       <body
         className={`${inter.className} ${geistSans.variable} ${geistMono.variable}  p-0 m-0`}
       >

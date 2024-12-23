@@ -1,4 +1,4 @@
-import { convertPalette } from "@/utils/colorUtils";
+import { convertColor, convertPalette } from "@/utils/colorUtils";
 import { FormatterFunction } from "@/utils/formatters/formatters";
 import { generateColorPalette } from "@/lib/generateColorPalette";
 
@@ -8,9 +8,10 @@ export const scssFormatter: FormatterFunction = (
   { colorFormat },
 ) => {
   const formatPalette = (palette: ReturnType<typeof generateColorPalette>) => {
-    const { accentPalette, grayPalette } = palette;
+    const { accentPalette, grayPalette, background } = palette;
     const accentColors = convertPalette(accentPalette.scale, colorFormat);
     const grayColors = convertPalette(grayPalette.scale, colorFormat);
+    const backgroundColor = convertColor(background, colorFormat);
 
     return `  // Accent Colors
   $accent-50: ${accentColors[0]};
@@ -41,7 +42,7 @@ export const scssFormatter: FormatterFunction = (
   $gray-1000: ${grayColors[11]};
   
   // Semantic Colors
-  $background: ${palette.background};
+  $background: ${backgroundColor};
   $foreground: ${grayColors[11]};
   $primary: ${accentColors[8]};
   $secondary: ${grayColors[8]};

@@ -42,6 +42,11 @@ export const applyThemeToDocument = (
         entry !== null && !entry[0].startsWith("/*"),
     );
 
+  localStorage.setItem(
+    "apply_theme_to_document",
+    JSON.stringify({ radix: radixVariablesEntries, shadcn: variableEntries }),
+  );
+
   // Set each CSS custom property
   radixVariablesEntries.forEach(([variable, value]) => {
     root.style.setProperty(variable, value);

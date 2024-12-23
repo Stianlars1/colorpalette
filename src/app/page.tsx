@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { PalettePreviewer } from "@/features/PalettePreviewer/PalettePreviewer";
 import { useLocalTheme } from "@/hooks/useLocalTheme";
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/layout/header";
 import { ThemeType } from "@/types/theme";
 import NewColorPaletteGenerator from "@/components/NewColorPaletteGenerator";
 import { ColorFields } from "@/components/ui/colorFields/colorFields";
@@ -11,6 +11,8 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { CopyableOutput } from "@/components/copyableOutput/CopyableOutput";
 import { GradientPageBackground } from "@/components/GradientPageBackground/GradientPageBackground";
+import { updateThemeColor } from "@/lib/updateThemeColor";
+import { Footer } from "@/components/layout/footer/footer";
 
 export default function Home() {
   const { accent, gradientColor, gray, background, darkBackground } =
@@ -23,11 +25,14 @@ export default function Home() {
   const [darkmodeBackgroundColor, setDarkmodeBackgroundColor] =
     useState(darkBackground);
 
+  const isLightMode = theme === "light";
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const toggleTheme = (newTheme: ThemeType) => {
+    updateThemeColor(isLightMode ? darkmodeBackgroundColor : backgroundColor);
     setTheme(newTheme);
   };
 
@@ -39,7 +44,7 @@ export default function Home() {
         <div className={" flex  flex-col gap-8 pageContentWrapper"}>
           <Header
             backgroundColor={
-              theme === "light" ? backgroundColor : darkmodeBackgroundColor
+              isLightMode ? backgroundColor : darkmodeBackgroundColor
             }
             theme={theme as ThemeType}
             toggleTheme={toggleTheme}
@@ -72,7 +77,7 @@ export default function Home() {
             accentColor={accentColor}
             grayColor={grayColor}
             backgroundColor={
-              theme === "light" ? backgroundColor : darkmodeBackgroundColor
+              isLightMode ? backgroundColor : darkmodeBackgroundColor
             }
           />
 
@@ -99,6 +104,8 @@ export default function Home() {
           backgroundColor={backgroundColor}
           darkmodeBackgroundColor={darkmodeBackgroundColor}
         />
+
+        <Footer />
       </main>
       <GradientPageBackground
         theme={(theme as ThemeType) ?? ("light" as ThemeType)}

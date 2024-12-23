@@ -14,11 +14,16 @@ import { applyThemeToDocument } from "@/utils/applyTheme";
 import { ThemeType } from "@/types/theme";
 import { debounce } from "@/utils/debounce";
 import { cn } from "@/lib/utils";
-import { colorFormats, templates } from "@/components/copyableOutput/lib";
-import RequestExportOption from "@/components/copyableOutput/requestOption/requestOption";
+import {
+  colorFormats,
+  stylesheetPresets,
+} from "@/components/copyableOutput/lib";
+import RequestExportOption from "@/components/requestOption/requestOption";
 import { Button } from "@/components/ui/button";
 import { cx } from "class-variance-authority";
 import { updateThemeColor } from "@/lib/updateThemeColor";
+import { isSafariIOS } from "@/lib/isSafari";
+import { usePaletteStorage } from "@/hooks/usePaletteStorage";
 
 interface CopyableOutputProps {
   appearance: ThemeType;
@@ -44,12 +49,12 @@ export const CopyableOutput = memo(
       light: ReturnType<typeof generateColorPalette> | null;
       dark: ReturnType<typeof generateColorPalette> | null;
     }>({ light: null, dark: null });
-    const [isOpen, setIsOpen] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const backdropRef = useRef<HTMLDivElement>(null);
     const [debouncedCode, setDebouncedCode] = useState("");
-
+    const { savePalette } = usePaletteStorage();
+    const isLight = appearance === "light";
     // Debounced update for syntax highlighting
     const updateSyntaxHighlighter = useMemo(
       () =>
@@ -91,17 +96,18 @@ export const CopyableOutput = memo(
               accent: accent,
             });
 
-            setColorPalettes({ light: lightPalette, dark: darkPalette });
+            const isLightMode = appearance === "light";
 
+            setColorPalettes({ light: lightPalette, dark: darkPalette });
             applyThemeToDocument(
-              currentAppearance === "light" ? bgColor : darkBgColor,
-              currentAppearance === "light" ? lightPalette : darkPalette,
+              isLightMode ? bgColor : darkBgColor,
+              isLightMode ? lightPalette : darkPalette,
               appearance,
             );
           },
           50,
         ),
-      [],
+      [appearance],
     );
 
     // Effect for palette generation
@@ -166,19 +172,19 @@ export const CopyableOutput = memo(
         backdropRef.current.style.display = "none";
         if (colorPalettes.light && colorPalettes.dark) {
           updateThemeColor(
-            appearance === "light"
+            isLight
               ? colorPalettes.light?.accentPalette.scale[3]
               : colorPalettes.dark?.accentPalette.scale[3],
           );
         }
       } else {
-        updateThemeColor(
-          appearance === "light" ? backgroundColor : darkmodeBackgroundColor,
-        );
+        updateThemeColor(isLight ? backgroundColor : darkmodeBackgroundColor);
 
         console.log("open");
         dialogRef.current.showModal();
-        backdropRef.current.style.display = "block";
+        if (isSafariIOS()) {
+          backdropRef.current.style.display = "block";
+        }
       }
     };
     useEffect(() => {
@@ -227,7 +233,7 @@ export const CopyableOutput = memo(
                 <div>
                   <label className={styles.label}>StyleSheet Preset:</label>
                   <div className={styles.radioGroup}>
-                    {templates.map((format) => (
+                    {stylesheetPresets.map((format) => (
                       <label
                         key={format}
                         className={cn(

@@ -1,6 +1,6 @@
 import { FormatterFunction } from "@/utils/formatters/formatters";
 import { generateColorPalette } from "@/lib/generateColorPalette";
-import { convertPalette } from "@/utils/colorUtils";
+import { convertColor, convertPalette } from "@/utils/colorUtils";
 
 export const muiFormatter: FormatterFunction = (
   lightPalette,
@@ -8,23 +8,27 @@ export const muiFormatter: FormatterFunction = (
   { colorFormat },
 ) => {
   const formatPalette = (palette: ReturnType<typeof generateColorPalette>) => {
-    const { accentPalette, grayPalette } = palette;
+    const { accentPalette, grayPalette, background } = palette;
     const accentColors = convertPalette(accentPalette.scale, colorFormat);
     const grayColors = convertPalette(grayPalette.scale, colorFormat);
-
+    const backgroundColor = convertColor(background, colorFormat);
+    const accentContrast = convertColor(
+      accentPalette?.contrast ?? accentPalette.scale[11],
+      colorFormat,
+    );
     return `{
       palette: {
         primary: {
           main: '${accentColors[8]}',
           light: '${accentColors[4]}',
           dark: '${accentColors[10]}',
-          contrastText: '${accentPalette.contrast}',
+          contrastText: '${accentContrast}',
         },
         secondary: {
           main: '${grayColors[8]}',
           light: '${grayColors[4]}',
           dark: '${grayColors[10]}',
-          contrastText: '${grayPalette.contrast}',
+          contrastText: '${grayColors[11]}',
         },
         grey: {
           50: '${grayColors[0]}',
@@ -48,7 +52,7 @@ export const muiFormatter: FormatterFunction = (
           disabled: '${grayColors[6]}',
         },
         background: {
-          default: '${palette.background}',
+          default: '${backgroundColor}',
           paper: '${grayColors[0]}',
         },
       },
