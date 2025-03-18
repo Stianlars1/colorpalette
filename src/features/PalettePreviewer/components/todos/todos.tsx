@@ -1,12 +1,15 @@
 import styles from "./todos.module.css";
-import { todosArray } from "@/features/PalettePreviewer/components/todos/todosLib";
+import {
+  todosArray,
+  TodoType,
+} from "@/features/PalettePreviewer/components/todos/todosLib";
 import { useState } from "react";
 import { cx } from "class-variance-authority";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 
 export const Todos = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [todosList, setTodosList] = useState(todosArray);
+  const [todosList, setTodosList] = useState<TodoType[]>(todosArray);
 
   const handleTodoChange = (todoId: number) => {
     // set a todos "completed" field to true on click
@@ -56,18 +59,35 @@ export const Todos = () => {
         </li>
 
         {todosList.map((todo, index) => (
-          <li
+          <Todo
             key={todo.id}
-            className={styles.todoItem}
-            onChange={() => handleTodoChange(todo.id)}
-          >
-            <input type={"checkbox"} checked={todo.completed} />
-            <span className={cx(todo.completed && styles.completedText)}>
-              {todo.title}
-            </span>
-          </li>
+            todo={todo}
+            handleTodoChange={() => handleTodoChange(todo.id)}
+          />
         ))}
       </ul>
     </div>
+  );
+};
+
+const Todo = ({
+  todo,
+  handleTodoChange,
+}: {
+  todo: TodoType;
+  handleTodoChange: () => void;
+}) => {
+  const [checked, setChecked] = useState(todo.completed);
+  return (
+    <li key={todo.id} className={styles.todoItem} onChange={handleTodoChange}>
+      <input
+        type={"checkbox"}
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+      />
+      <span className={cx(todo.completed && styles.completedText)}>
+        {todo.title}
+      </span>
+    </li>
   );
 };

@@ -1,4 +1,9 @@
-export const todosArray = [
+export interface TodoType {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+export const todosArray: TodoType[] = [
   {
     id: 1,
     title: "Create a new project",

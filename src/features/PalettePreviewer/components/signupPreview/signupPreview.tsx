@@ -21,11 +21,11 @@ export const SignupPreview = () => {
       <div className={styles.signupPreview}>
         <h2 className={styles.heading}>Signup</h2>
         <form autoComplete={"off"} className={styles.wrapper}>
-          <label htmlFor={"input1"} className={styles.label}>
+          <label htmlFor={"input1_signup"} className={styles.label}>
             Email
           </label>
           <input
-            id={"input1"}
+            id={"input1_signup"}
             className={styles.input}
             value={inputValue}
             placeholder={"Enter your email"}
@@ -34,11 +34,11 @@ export const SignupPreview = () => {
         </form>
 
         <form autoComplete={"off"} className={styles.wrapper}>
-          <label htmlFor={"input2"} className={styles.label}>
+          <label htmlFor={"input2_signup"} className={styles.label}>
             Password
           </label>
           <input
-            id={"input2"}
+            id={"input2_signup"}
             className={cn(styles.input, isError && styles.inputError)}
             value={inputValue}
             placeholder={"Enter your password"}
@@ -48,11 +48,11 @@ export const SignupPreview = () => {
           />
         </form>
         <form autoComplete={"off"} className={styles.wrapper}>
-          <label htmlFor={"input3"} className={styles.label}>
+          <label htmlFor={"input3_signup"} className={styles.label}>
             Repeat password
           </label>
           <input
-            id={"input3"}
+            id={"input3_signup"}
             className={styles.input}
             value={inputValue}
             placeholder={"Confirm password"}

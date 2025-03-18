@@ -1,0 +1,111 @@
+// components/welcomeBanner/WelcomeBanner.module.scss
+
+.welcomeBanner {
+  padding: 1rem;
+
+  overflow: hidden;
+  position: relative;
+  background-color: hsl(var(--accent-4));
+}
+
+.bannerContent {
+  width: min(var(--max-width), 100%);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.statsContainer {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: stretch;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+.statItem {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease-in-out;
+}
+
+.statValue {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: hsl(var(--accent-11));
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.miniStat {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.requestsBadge {
+  font-size: 0.9rem;
+  text-align: center;
+  color: hsl(var(--accent-11));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.requestsCount {
+  font-weight: 700;
+  font-size: 1rem;
+  color: hsl(var(--accent-11));
+  margin-right: 0.25rem;
+}
+
+.requestsLink {
+  font-weight: 600;
+  color: hsl(var(--accent-11));
+  margin-left: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.preferredNumber {
+  color: hsl(var(--accent-11));
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
+
+.onMobile {
+  margin-top: 2rem;
+  padding: 1.5rem 1rem;
+  .bannerContent {
+    .statsContainer {
+      .image {
+        display: none;
+      }
+    }
+  }
+}

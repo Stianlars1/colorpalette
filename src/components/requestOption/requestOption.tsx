@@ -3,9 +3,11 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import styles from "./requestOption.module.css";
 import { useState } from "react";
 import { cx } from "class-variance-authority";
+import { logRequestExportEvent } from "@/lib/logExportEvent";
 
 const RequestExportOption = () => {
-  const handleGithubIssue = () => {
+  const handleGithubIssue = async () => {
+    await logRequestExportEvent();
     window.open(
       "https://github.com/Stianlars1/colorpalette/issues/new?labels=feature-request,export-format&template=export-format-request.md&title=%5BExport%20Format%5D%3A%20",
       "_blank",

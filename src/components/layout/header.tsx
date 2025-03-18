@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ThemeType } from "@/types/theme";
 import { isSafariIOS } from "@/lib/isSafari";
 import { updateThemeColor } from "@/lib/updateThemeColor";
+import { cx } from "class-variance-authority";
+import styles from "./header.module.css";
 
 export const Header = ({
   theme,
@@ -28,7 +30,6 @@ export const Header = ({
     );
 
     if (dialogEl) {
-      console.log("open dialog");
       updateThemeColor(theme, backgroundColor, darkmodeBackgroundColor);
       dialogEl.showModal();
 
@@ -38,7 +39,10 @@ export const Header = ({
     }
   };
   return (
-    <div id={"top"} className="flex flex-col items-center mb-4 mt-[4rem]">
+    <div
+      id={"top"}
+      className={cx("flex flex-col items-center mb-4 ", styles.header)}
+    >
       <h1
         className="mb-6 text-4xl font-bold text-center"
         style={{

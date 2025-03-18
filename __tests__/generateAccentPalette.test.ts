@@ -69,20 +69,18 @@ describe("generateAccentPalette", () => {
     const result = generateAccentPalette(
       accentColor,
       backgroundColor,
-      appearance
+      appearance,
     );
-
-    console.log("First color of accentScale:", result.accentScale[0]);
 
     expect(result.accentScale).toEqual(expectedAccentPalette.accentScale);
     expect(result.accentScaleAlpha).toEqual(
-      expectedAccentPalette.accentScaleAlpha
+      expectedAccentPalette.accentScaleAlpha,
     );
     expect(result.accentScaleWideGamut).toEqual(
-      expectedAccentPalette.accentScaleWideGamut
+      expectedAccentPalette.accentScaleWideGamut,
     );
     expect(result.accentScaleAlphaWideGamut).toEqual(
-      expectedAccentPalette.accentScaleAlphaWideGamut
+      expectedAccentPalette.accentScaleAlphaWideGamut,
     );
   });
 });

@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { cx } from "class-variance-authority";
 import { updateThemeColor } from "@/lib/updateThemeColor";
 import { isSafariIOS } from "@/lib/isSafari";
+import { logExportEvent } from "@/lib/logExportEvent";
 
 interface CopyableOutputProps {
   appearance: ThemeType;
@@ -230,6 +231,14 @@ export const CopyableOutput = memo(
       }, 200);
     };
 
+    const handleOnCopySuccess = () => {
+      // Log export dialog open event
+
+      logExportEvent(selectedFormat, colorFormat).catch((err) =>
+        console.error("Failed to log export event:", err),
+      );
+    };
+
     return (
       <>
         <dialog
@@ -324,7 +333,10 @@ export const CopyableOutput = memo(
                         isExpanded && styles.syntaxExpanded,
                       )}
                     >
-                      <SyntaxHighlighter code={debouncedCode} />
+                      <SyntaxHighlighter
+                        code={debouncedCode}
+                        onCopy={handleOnCopySuccess}
+                      />
                     </div>
                     <Button
                       className={styles.ghostButton}

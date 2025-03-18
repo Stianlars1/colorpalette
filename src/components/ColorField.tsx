@@ -37,7 +37,6 @@ const ColorField: React.FC<ColorFieldProps> = ({
   const handleColorChange = useMemo(
     () =>
       debounce((newColor: string) => {
-        console.log(1);
         setInputValue(newColor);
         localStorage.setItem(
           `radix_custom_color_${label.toLowerCase()}`,
@@ -49,7 +48,6 @@ const ColorField: React.FC<ColorFieldProps> = ({
     [label, onChange],
   );
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(2);
     const color = formatColor(e.target.value);
     setInputValue(color);
     if (validateColor(color)) {

@@ -8,10 +8,12 @@ import { cn } from "@/lib/utils";
 
 interface SyntaxHighlighterProps {
   code: string;
+  onCopy: () => void;
 }
 
 export const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
   code,
+  onCopy,
 }) => {
   const [mounted, setMounted] = useState(false);
   const [displayedCode, setDisplayedCode] = useState(code);
@@ -67,6 +69,7 @@ export const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
           className={cn(styles.highlighter)}
           code={displayedCode}
           key={displayedCode} // Force re-render when code changes
+          onCopied={onCopy}
         />
       </div>
     </div>

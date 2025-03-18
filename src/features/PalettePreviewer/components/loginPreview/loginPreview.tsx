@@ -16,16 +16,17 @@ export const LoginPreview = () => {
   const handleClick = () => {
     setIsLoading(!isLoading);
   };
+
   return (
     <>
       <div className={styles.loginPreview}>
         <h2 className={styles.heading}>Login</h2>
         <form autoComplete={"off"} className={styles.wrapper}>
-          <label htmlFor={"input1"} className={styles.label}>
+          <label htmlFor={"input1_login"} className={styles.label}>
             Email
           </label>
           <input
-            id={"input1"}
+            id={"input1_login"}
             className={styles.input}
             value={inputValue}
             placeholder={"Enter your email"}
@@ -34,11 +35,11 @@ export const LoginPreview = () => {
         </form>
 
         <form autoComplete={"off"} className={styles.wrapper}>
-          <label htmlFor={"input2"} className={styles.label}>
+          <label htmlFor={"input2_login"} className={styles.label}>
             Password
           </label>
           <input
-            id={"input2"}
+            id={"input2_login"}
             className={styles.input}
             value={inputValue}
             placeholder={"Enter your password"}
