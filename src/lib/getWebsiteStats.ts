@@ -1,6 +1,5 @@
-// In a Next.js page component (e.g., pages/index.js)
 import { doc, getDoc } from "firebase/firestore";
-import db from "../../../firebase";
+import db from "../../firebase";
 import { InsightsData } from "@/components/insightsData/insightsData";
 
 export async function getWebsiteStats() {
@@ -9,7 +8,9 @@ export async function getWebsiteStats() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return JSON.stringify(docSnap.data() as InsightsData); // return the data
+      const casted = docSnap.data() as InsightsData; // return the data
+      const { lastUpdated, ...rest } = casted;
+      return rest;
     } else {
       return null;
     }

@@ -13,7 +13,7 @@ export interface InsightsData {
   requestsExport: number;
   stylesheetPresets: Record<string, number>;
   colorFormats: Record<string, number>;
-  lastUpdated: {
+  lastUpdated?: {
     seconds: number;
     nanoseconds: number;
   };
@@ -23,10 +23,10 @@ export const WelcomeBanner = ({
   insights,
   onMobile,
 }: {
-  insights: string | null;
+  insights: InsightsData | null;
   onMobile: boolean;
 }) => {
-  const insightsData = insights ? (JSON.parse(insights) as InsightsData) : null;
+  const insightsData = insights;
 
   useEffect(() => {
     // Track website visit when component mounts (once per session)

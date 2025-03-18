@@ -12,12 +12,12 @@ import Link from "next/link";
 import { CopyableOutput } from "@/components/copyableOutput/CopyableOutput";
 import { GradientPageBackground } from "@/components/GradientPageBackground/GradientPageBackground";
 import { Footer } from "@/components/layout/footer/footer";
-import WelcomeBanner from "@/components/insightsData/insightsData";
+import WelcomeBanner, {
+  InsightsData,
+} from "@/components/insightsData/insightsData";
 
-export const Home = ({ insights }: { insights: string | null }) => {
-  const stats = insights ? JSON.parse(insights) : null;
-  const { accent, gradientColor, gray, background, darkBackground } =
-    useLocalTheme();
+export const Home = ({ insights }: { insights: InsightsData | null }) => {
+  const { accent, gray, background, darkBackground } = useLocalTheme();
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
