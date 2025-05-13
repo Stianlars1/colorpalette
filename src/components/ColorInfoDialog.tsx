@@ -24,10 +24,11 @@ export function ColorInfoDialog({
   const { solidColor, alphaColor, wideGamutColor, wideGamutAlphaColor } = color;
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={onClose}>
+    <Dialog.Root open={isOpen} onOpenChange={onClose} modal={true}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50 dark:bg-black/70" />
-        <Dialog.Content className="fixed w-full max-w-md p-4 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md dark:bg-grayDark-2 top-1/2 left-1/2">
+        <Dialog.Overlay className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50" />
+
+        <Dialog.Content className="fixed w-full max-w-md p-4 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md dark:bg-grayDark-2 top-1/2 left-1/2 z-[100]">
           <div className="h-32" style={{ backgroundColor: solidColor }}></div>
           <h3 className="mt-4 mb-2 text-2xl font-bold capitalize text-gray-12 dark:text-grayDark-12">
             {`${categorizeColor(color.solidColor)} ${index ? index + 1 : ""}`}

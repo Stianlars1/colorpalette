@@ -5,6 +5,8 @@ import {
   steps,
 } from "@/lib/constants";
 import Color from "colorjs.io";
+import { transposeProgressionStart } from "@/lib/generateRadixColors";
+import { lightModeEasing } from "@/lib/mix";
 
 export function interpolateColorScale(
   targetColor: Color,
@@ -80,17 +82,17 @@ export function interpolateColorScale(
   });
 
   // Adjust lightness
-  const lightnessAdjustmentCurve = [1, 0, 1, 0];
   if (interpolatedScale[0].coords[0] > 0.5) {
-    let lightnessValues = interpolatedScale.map((color) => color.coords[0]);
-    let adjustedLightness = adjustLightness(
-      Math.max(0, Math.min(1, backgroundColor.coords[0])),
-      [1, ...lightnessValues],
-      lightnessAdjustmentCurve,
+    const lightnessScale = interpolatedScale.map((c) => c.coords[0]);
+    const backgroundL = Math.max(0, Math.min(1, backgroundColor.coords[0]));
+    const remapped = transposeProgressionStart(
+      backgroundL,
+      [1, ...lightnessScale],
+      lightModeEasing,
     );
-    adjustedLightness.shift();
-    adjustedLightness.forEach((lightness, index) => {
-      interpolatedScale[index].coords[0] = lightness;
+    remapped.shift();
+    remapped.forEach((l, i) => {
+      interpolatedScale[i].coords[0] = l;
     });
   } else {
     let lightnessAdjustmentCurve = [...defaultLightnessAdjustmentCurve];

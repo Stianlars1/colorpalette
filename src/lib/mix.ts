@@ -5,7 +5,7 @@ function mix(
   color2: number[],
   maxValue: number,
   precision: number,
-  alpha?: number
+  alpha?: number,
 ) {
   let [r1, g1, b1] = color1.map((c) => Math.round(c * maxValue));
   let [r2, g2, b2] = color2.map((c) => Math.round(c * maxValue));
@@ -45,8 +45,8 @@ function mix(
       precision,
       Math.max(
         0,
-        Math.ceil((alpha ?? Math.max(rRatio, gRatio, bRatio)) * precision)
-      )
+        Math.ceil((alpha ?? Math.max(rRatio, gRatio, bRatio)) * precision),
+      ),
     ) / precision;
 
   let r = clamp(-((r2 * (1 - mixRatio) - r1) / mixRatio));
@@ -80,7 +80,7 @@ function mixComponent(
   component: number,
   mixRatio: number,
   baseComponent: number,
-  round: boolean = true
+  round: boolean = true,
 ) {
   return round
     ? Math.round(baseComponent * (1 - mixRatio)) +
@@ -91,16 +91,11 @@ function mixComponent(
 export function mixColors(
   color1: string,
   color2: string,
-  alpha?: number
+  ratio = 0.5,
+  space: "oklch" | "srgb" = "oklch",
 ): string {
-  const [r, g, b, a] = mix(
-    new Color(color1).to("srgb").coords,
-    new Color(color2).to("srgb").coords,
-    255,
-    255,
-    alpha
-  );
-  return new Color("srgb", [r, g, b], a)
+  return Color.mix(color1, color2, ratio, { space })
+    .to("srgb")
     .toString({ format: "hex" })
     .toUpperCase();
 }
@@ -108,16 +103,13 @@ export function mixColors(
 export function mixColorsWideGamut(
   color1: string,
   color2: string,
-  alpha?: number
+  ratio = 0.5,
 ): string {
-  const [r, g, b, a] = mix(
-    new Color(color1).to("p3").coords,
-    new Color(color2).to("p3").coords,
-    255,
-    1000,
-    alpha
-  );
-  return new Color("p3", [r, g, b], a)
-    .toString({ precision: 4 })
-    .replace("color(p3 ", "color(display-p3 ");
+  return Color.mix(color1, color2, ratio, { space: "oklch" }).toString({
+    format: "color(display-p3)",
+  });
 }
+
+export const lightModeEasing: [number, number, number, number] = [
+  0.45, 0, 0.55, 1,
+];
