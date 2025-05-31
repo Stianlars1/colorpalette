@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import GoogleAnalytics from "@/lib/analytics/GoogleAnalytics";
 import PageTracking from "@/lib/analytics/PageTracking";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const geistSans = localFont({
@@ -33,7 +34,9 @@ export default function RootLayout({
         className={`${inter.className} ${geistSans.variable} ${geistMono.variable}  p-0 m-0`}
       >
         <GoogleAnalytics />
-        <PageTracking />
+        <Suspense>
+          <PageTracking />
+        </Suspense>
 
         <Providers>{children}</Providers>
       </body>
